@@ -1,8 +1,8 @@
 security:
   oauth2:
     client:
-      clientId: YOUR_CLIENT_ID_HERE
-      clientSecret: YOUR_CLIENT_SECRET_HERE
+      clientId: 22BLPZ
+      clientSecret: 5cb589f52d18eb8ea6d2eca750d45fea
       accessTokenUri: https://api.fitbit.com/oauth2/token
       userAuthorizationUri: https://www.fitbit.com/oauth2/authorize
       tokenName: oauth_token
@@ -15,6 +15,7 @@ fitbit:
   api:
     resource:
       activitiesUri: https://api.fitbit.com/1/user/-/activities.json
+      weightUri: https://api.fitbit.com/1/user/-/body/log/weight/date/2019-01-09.json
 
 logging:
   level:

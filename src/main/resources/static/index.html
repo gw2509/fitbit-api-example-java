@@ -23,6 +23,8 @@
 		Lifetime Steps: <span ng-bind="home.lifetimeSteps"></span><br />
 		Lifetime Distance: <span ng-bind="home.lifetimeDistance"></span><br />
 		Lifetime Floors: <span ng-bind="home.lifetimeFloors"></span><br />
+
+		Weight: <span ng-bind="home.weight"></span><br />
 	</div>
 	<script type="text/javascript" src="/webjars/angularjs/angular.min.js"></script>
 	<script type="text/javascript">
@@ -43,6 +45,12 @@
 				self.lifetimeDistance = data.distance.toLocaleString();
 			}).error(function() {
 				self.lifetimeSteps = "N/A";
+			});
+
+			$http.get("/weight").success(function(data) {
+				self.weight = data.weight.toLocaleString();
+			}).error(function() {
+				self.weight = "N/A";
 			});
 		});
 	</script>

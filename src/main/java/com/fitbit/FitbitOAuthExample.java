@@ -17,6 +17,8 @@ package com.fitbit;
 
 import com.fitbit.model.Activity;
 import com.fitbit.model.LifetimeActivity;
+import com.fitbit.model.Weight;
+import com.fitbit.model.Weights;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -30,6 +32,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
+import java.util.List;
 
 @SpringBootApplication
 @EnableOAuth2Sso
@@ -42,6 +45,9 @@ public class FitbitOAuthExample extends WebSecurityConfigurerAdapter {
 
 	@Value("${fitbit.api.resource.activitiesUri}")
 	String fitbitActivitiesUri;
+
+	@Value("${fitbit.api.resource.weightUri}")
+	String fitbitWeightUri;
 
 	@RequestMapping("/lifetime-activity")
 	public LifetimeActivity lifetimeActivity() {
@@ -56,6 +62,22 @@ public class FitbitOAuthExample extends WebSecurityConfigurerAdapter {
 		}
 
 		return lifetimeActivity;
+	}
+
+	@RequestMapping("/weight")
+	public Weight weight() {
+
+		Weight weight;
+
+		try {
+			Weights w = fitbitOAuthRestTemplate.getForObject(fitbitWeightUri, Weights.class);
+			weight = w.getWeights().get(0);
+		}
+		catch(Exception e) {
+			weight = new Weight();
+		}
+
+		return weight;
 	}
 	
 	@RequestMapping("/user")
